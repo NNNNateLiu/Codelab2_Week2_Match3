@@ -43,11 +43,13 @@ public class InputManagerScript : MonoBehaviour {
 					Vector2 pos1 = gameManager.GetPositionOfTokenInGrid(selected);
 					Vector2 pos2 = gameManager.GetPositionOfTokenInGrid(collider.gameObject);
 
-					//
+					//if the are next to each other
 					if(Mathf.Abs((pos1.x - pos2.x) + (pos1.y - pos2.y)) == 1)
 					{
+						//call SetupTokenExchange
 						moveManager.SetupTokenExchange(selected, pos1, collider.gameObject, pos2, true);
 					}
+					//empty token selected
 					selected = null;
 				}
 			}

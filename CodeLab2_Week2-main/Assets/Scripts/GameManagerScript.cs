@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour {
 
@@ -17,7 +18,8 @@ public class GameManagerScript : MonoBehaviour {
 	protected Object[] tokenTypes;
 	GameObject selected;
 
-	public virtual void Start () {
+	public virtual void Start () 
+	{
 		tokenTypes = (Object[])Resources.LoadAll("Tokens/");
 		gridArray = new GameObject[gridWidth, gridHeight];
 		MakeGrid();
@@ -27,41 +29,62 @@ public class GameManagerScript : MonoBehaviour {
 		moveTokenManager = GetComponent<MoveTokensScript>();
 	}
 
-	public virtual void Update(){
-		if(!GridHasEmpty()){
-			if(matchManager.GridHasMatch()){
+	public virtual void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			SceneManager.LoadScene(0);
+		}
+		//check if any grid is empty every frame
+		if(!GridHasEmpty())
+		{
+			if(matchManager.GridHasMatch())
+			{
 				matchManager.RemoveMatches();
-			} else {
+			} 
+			else 
+			{
 				inputManager.SelectToken();
 			}
-		} else {
-			if(!moveTokenManager.move){
+		} 
+		else 
+		{
+			
+			if(!moveTokenManager.move)
+			{
 				moveTokenManager.SetupTokenMove();
 			}
-			if(!moveTokenManager.MoveTokensToFillEmptySpaces()){
+			if(!moveTokenManager.MoveTokensToFillEmptySpaces())
+			{
 				repopulateManager.AddNewTokensToRepopulateGrid();
 			}
 		}
 	}
 
-	void MakeGrid() {
+	void MakeGrid() 
+	{
 		grid = new GameObject("TokenGrid");
-		for(int x = 0; x < gridWidth; x++){
-			for(int y = 0; y < gridHeight; y++){
+		for(int x = 0; x < gridWidth; x++)
+		{
+			for(int y = 0; y < gridHeight; y++)
+			{
 				AddTokenToPosInGrid(x, y, grid);
 			}
 		}
 	}
 
-	public virtual bool GridHasEmpty(){
-		for(int x = 0; x < gridWidth; x++){
-			for(int y = 0; y < gridHeight ; y++){
-				if(gridArray[x, y] == null){
+	public virtual bool GridHasEmpty()
+	{
+		for(int x = 0; x < gridWidth; x++)
+		{
+			for(int y = 0; y < gridHeight ; y++)
+			{
+				if(gridArray[x, y] == null)
+				{
 					return true;
 				}
 			}
 		}
-
 		return false;
 	}
 

@@ -9,10 +9,13 @@ public class RepopulateScript : MonoBehaviour {
 		gameManager = GetComponent<GameManagerScript>();
 	}
 
-	public virtual void AddNewTokensToRepopulateGrid(){
-		for(int x = 0; x < gameManager.gridWidth; x++){
+	public virtual void AddNewTokensToRepopulateGrid()
+	{
+		for(int x = 0; x < gameManager.gridWidth; x++)
+		{
 			GameObject token = gameManager.gridArray[x, gameManager.gridHeight - 1];
-			if(token == null){
+			if(token == null)
+			{
 				gameManager.AddTokenToPosInGrid(x, gameManager.gridHeight - 1, gameManager.grid);
 			}
 		}
