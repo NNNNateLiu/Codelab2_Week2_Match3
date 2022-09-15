@@ -35,9 +35,11 @@ public class GameManagerScript : MonoBehaviour {
 		{
 			SceneManager.LoadScene(0);
 		}
+		
 		//check if any grid is empty every frame
 		if(!GridHasEmpty())
 		{
+			//
 			if(matchManager.GridHasMatch())
 			{
 				matchManager.RemoveMatches();
@@ -54,6 +56,7 @@ public class GameManagerScript : MonoBehaviour {
 			{
 				moveTokenManager.SetupTokenMove();
 			}
+			
 			if(!moveTokenManager.MoveTokensToFillEmptySpaces())
 			{
 				repopulateManager.AddNewTokensToRepopulateGrid();
@@ -89,10 +92,14 @@ public class GameManagerScript : MonoBehaviour {
 	}
 
 
-	public Vector2 GetPositionOfTokenInGrid(GameObject token){
-		for(int x = 0; x < gridWidth; x++){
-			for(int y = 0; y < gridHeight ; y++){
-				if(gridArray[x, y] == token){
+	public Vector2 GetPositionOfTokenInGrid(GameObject token)
+	{
+		for(int x = 0; x < gridWidth; x++)
+		{
+			for(int y = 0; y < gridHeight ; y++)
+			{
+				if(gridArray[x, y] == token)
+				{
 					return(new Vector2(x, y));
 				}
 			}
@@ -106,7 +113,8 @@ public class GameManagerScript : MonoBehaviour {
 			(y - gridHeight/2) * tokenSize);
 	}
 
-	public void AddTokenToPosInGrid(int x, int y, GameObject parent){
+	public void AddTokenToPosInGrid(int x, int y, GameObject parent)
+	{
 		Vector3 position = GetWorldPositionFromGridPosition(x, y);
 		GameObject token = 
 			Instantiate(tokenTypes[Random.Range(0, tokenTypes.Length)], 

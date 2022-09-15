@@ -19,7 +19,8 @@ public class MoveTokensScript : MonoBehaviour {
 	Vector2 exchangeGridPos1;
 	Vector2 exchangeGridPos2;
 
-	public virtual void Start () {
+	public virtual void Start () 
+	{
 		gameManager = GetComponent<GameManagerScript>();
 		matchManager = GetComponent<MatchManagerScript>();
 		lerpPercent = 0;
@@ -105,7 +106,8 @@ public class MoveTokensScript : MonoBehaviour {
 
 		token.transform.position =	pos;
 
-		if(lerpPercent == 1){
+		if(lerpPercent == 1)
+		{
 			gameManager.gridArray[endGridX, endGridY] = token;
 			gameManager.gridArray[startGridX, startGridY] = null;
 		}
