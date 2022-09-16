@@ -214,40 +214,35 @@ public class MatchManagerScript : MonoBehaviour
 				//Question: Should we add a null check here?
 				//if (gameManager.gridArray[x, y] == null) continue;
 				
-				if(x < gameManager.gridWidth - 2)
+				//check how many tokens on the right have the same color with the current looping one
+				int horizonMatchLength = GetHorizontalMatchLength(x, y);
+				int verticalMatchLength = GetVerticalMatchLength(x, y);
+
+				//if Length is more than 2, then destroy every token horizontally  
+				if(horizonMatchLength > 2)
 				{
-					//check how many tokens on the right have the same color with the current looping one
-					int horizonMatchLength = GetHorizontalMatchLength(x, y);
-					int verticalMatchLength = GetVerticalMatchLength(x, y);
-
-					//if Length is more than 2, then destroy every token horizontally  
-					if(horizonMatchLength > 2)
+					for(int i = x; i < x + horizonMatchLength; i++)
 					{
-						for(int i = x; i < x + horizonMatchLength; i++)
-						{
-							GameObject token = gameManager.gridArray[i, y]; 
-							Destroy(token);
+						GameObject token = gameManager.gridArray[i, y]; 
+						Destroy(token);
 
-							gameManager.gridArray[i, y] = null;
-							numRemoved++;
-						}
+						gameManager.gridArray[i, y] = null;
+						numRemoved++;
 					}
-
-					if (verticalMatchLength > 2)
+				}
+				if (verticalMatchLength > 2)
+				{
+					for(int i = y; i < y + verticalMatchLength; i++)
 					{
-						for(int i = y; i < y + verticalMatchLength; i++)
-						{
 							
-							GameObject token = gameManager.gridArray[x, i];
-							if (token != null)
-							{
-								Destroy(token);
-							}
-							gameManager.gridArray[x, i] = null;
-							numRemoved++;
+						GameObject token = gameManager.gridArray[x, i];
+						if (token != null)
+						{
+							Destroy(token);
 						}
+						gameManager.gridArray[x, i] = null;
+						numRemoved++;
 					}
-					
 				}
 			}
 		}
