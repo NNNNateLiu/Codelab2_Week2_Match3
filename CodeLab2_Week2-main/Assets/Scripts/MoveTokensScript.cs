@@ -28,10 +28,11 @@ public class MoveTokensScript : MonoBehaviour {
 
 	public virtual void Update () {
 
-		if(move){
+		if(move)
+		{
 			lerpPercent += lerpSpeed;
 
-			if(lerpPercent >= 1){
+			if(lerpPercent >= 1f){
 				lerpPercent = 1;
 			}
 
@@ -102,6 +103,8 @@ public class MoveTokensScript : MonoBehaviour {
 		Vector3 startPos = gameManager.GetWorldPositionFromGridPosition(startGridX, startGridY);
 		Vector3 endPos = gameManager.GetWorldPositionFromGridPosition(endGridX, endGridY);
 
+		//float this
+		
 		Vector3 pos = Vector3.Lerp(startPos, endPos, lerpPercent);
 
 		token.transform.position =	pos;
@@ -126,7 +129,9 @@ public class MoveTokensScript : MonoBehaviour {
 					for(int pos = y; pos < gameManager.gridHeight; pos++)
 					{
 						GameObject token = gameManager.gridArray[x, pos];
-						if(token != null){
+						if(token != null)
+						{
+							//lerpPercent = 0;
 							MoveTokenToEmptyPos(x, pos, x, pos - 1, token);
 							movedToken = true;
 						}
