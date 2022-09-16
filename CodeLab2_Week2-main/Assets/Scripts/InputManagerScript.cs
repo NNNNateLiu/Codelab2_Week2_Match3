@@ -21,7 +21,8 @@ public class InputManagerScript : MonoBehaviour {
 	
 	public virtual void SelectToken(){
 		//click down left mouse button to get a token
-		if(Input.GetMouseButtonDown(0)){
+		if(Input.GetMouseButtonDown(0) && moveManager.lerpPercent == 1f)
+		{
 			//get the position of center point of the screen
 			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			
